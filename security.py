@@ -49,3 +49,14 @@ def is_strong_password(password: str) -> bool:
         return False
 
     return True
+
+if __name__ == "__main__":
+    password = "StrongPass123!"
+
+    hashed = hash_password(password)
+
+    print("Hashed Password:")
+    print(hashed)
+
+    print("\nVerification:")
+    print(verify_password(password, hashed))
