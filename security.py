@@ -1,4 +1,5 @@
 import bcrypt
+import re
 
 
 def hash_password(password: str) -> str:
@@ -27,4 +28,24 @@ def verify_password(password: str, hashed_password: str) -> bool:
     return bcrypt.checkpw(password_bytes, hashed_bytes)
 
 
+def is_strong_password(password: str) -> bool:
+    """
+    Validate password strength requirements.
+    """
 
+    if len(password) < 8:
+        return False
+
+    if not re.search(r"[A-Z]", password):
+        return False
+
+    if not re.search(r"[a-z]", password):
+        return False
+
+    if not re.search(r"[0-9]", password):
+        return False
+
+    if not re.search(r"[@$!%*?&]", password):
+        return False
+
+    return True
